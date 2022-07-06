@@ -8,6 +8,7 @@ import Orders from "../Orders/Orders"
 import NotFound from "../NotFound/NotFound"
 import ShoppingCart from "../ShoppingCart/ShoppingCart"
 import { removeFromCart, addToCart, getQuantityOfItemInCart, getTotalItemsInCart } from "../../utils/cart"
+import apiClient from "../../services/apiClient"
 import "./App.css"
 
 export default function App() {
@@ -74,6 +75,21 @@ export default function App() {
 
     fetchProducts()
   }, [])
+
+  useEffect(() => {
+    const fetchAuthUser = async () => {
+        const {data, error} = await apiClient.fetchUserFromToken();
+        if(data) setUser(data.user);
+        if(error) setError(error);
+    }
+    
+
+    const token = localStorage.getItem('student_store_token');
+    if(token){
+      apiClient.setToken(token);
+      fetchAuthUser();
+    }
+  }, []);
 
   return (
     <div className="App">

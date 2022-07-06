@@ -3,6 +3,7 @@ import logo from "../../assets/codepath.svg"
 import Twitter from "../Icons/Twitter"
 import Instagram from "../Icons/Instagram"
 import Facebook from "../Icons/Facebook"
+import ApiClient from "../../services/apiClient"
 import "./Navbar.css"
 
 export default function Navbar() {
@@ -33,6 +34,9 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="/#Buy">Buy Now</Link>
+          </li>
+          <li>
+            <Link to="/#Buy" onClick={ApiClient.logoutUser}>Log Out</Link>
           </li>
         </ul>
       </div>
